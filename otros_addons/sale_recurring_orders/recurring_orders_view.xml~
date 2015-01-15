@@ -138,8 +138,8 @@
 				</field> 
 			     </page>
 			     <page string="Facturas de Cliente">
-                                <field name="account_invoice_ids"  widget="one2many_list" >
-                                    <tree string="Acoount Invoice" editable="bottom">
+                                <field name="account_invoice_ids" nolabel="1" mode="tree" widget="one2many_list" >
+                                    <tree string="Acoount Invoice">
 					<field name="partner_id" String="Cliente"/>
 					<field name="date_invoice" />
 					<field name="number" />
@@ -267,10 +267,11 @@
         </record>
         
         <!-- Menu items -->
-        
+        <!--
         <menuitem name="Gestion de Grupos" id="menu_recurring_orders_agreements" 
             parent="base.menu_sales" action="action_sale_recurring_orders_agreement" 
             sequence="4" string="Gestion de Grupos"/>
+	 -->
       
     </data>
 </openerp>

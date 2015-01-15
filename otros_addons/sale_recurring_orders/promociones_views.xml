@@ -37,7 +37,7 @@
 	
 		
 
-    <menuitem id="menu_promociones" name="Menu de Promocionesa" parent="base.menu_sales" action="promociones_action" sequence="9"/>
+    <menuitem id="menu_promociones" name="Menu de Promociones" parent="base.menu_sales" action="promociones_action" sequence="9"/>
 	
 	
 	
