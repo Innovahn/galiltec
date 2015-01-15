@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<report id="contrato_report" string="Reporte Contratos"
+model="sale.recurring_orders.agreement" name="contrato.report"
+rml="sale_recurring_orders/report/contratos.rml" />
+</data>
+</openerp>

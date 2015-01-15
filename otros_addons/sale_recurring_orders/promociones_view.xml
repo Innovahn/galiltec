@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+
+	<data>
+	
+	
+
+          <!-- Creo la vista Tree para las promociones -->
+
+        <record model="ir.ui.view" id="promociones_tree_view">
+          <field name="name">promociones.tree</field>
+            <field name="model">cybex.promociones</field>
+            <field name="arch" type="xml">
+           <tree string="Menu Promociones" editable="bottom">
+	      <field name="flag" />
+              <field name="name" />
+	      <field name="description"/>
+              <field name="tiempo" />
+            </tree>
+          </field>
+        </record>
+
+
+
+	
+	<record model="ir.actions.act_window" id="promociones_action">
+	<field name="name">Promociones</field>
+	<field name="res_model">cybex.promociones</field>
+	<field name="view_mode">tree</field>
+	<field name="help" type="html">
+	
+		<p class="oe_view_nocontent_create">
+                
+                </p>
+	</field>
+	</record>
+	
+		
+
+    <menuitem id="menu_promociones" name="Menu de Promocionesa" parent="base.menu_sales" action="promociones_action" sequence="9"/>
+	
+	
+	
+	</data>
+</openerp>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+	<data noupdate="1">
+	
+		<!-- Sequence type for agreement -->
+		<record model="ir.sequence.type" id="seq_type_excusas">
+			<field name="name">secuencia de Excusas</field>
+			<field name="code">serial_excusa</field>
+		</record>
+
+		<!--Sequence for agreement -->
+		<record model="ir.sequence" id="seq_excusas">
+			<field name="name">secuencia de Excusas</field>
+			<field name="code">serial_excusa</field>
+			<field name="number_next_actual" eval="1"/>
+		</record>
+
+
+	</data>
+</openerp>

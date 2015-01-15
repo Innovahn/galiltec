@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<document filename="test.pdf">
+<template title="Reportes Cybex" allowsplitting="20" >
+
+   <pageTemplate id="main" size="letter" >
+
+	<frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+	<frame id="second" x1="42.0" y1="42.0" width="511" height="758"/>
+	<header>
+		<pageGraphics>
+
+			<setfont name="helvetica bold" size="9"/>
+			<linemode width="8.7"/>
+			<stroke color="black"/>
+			<lines> 1cm 28cm 20cm 28cm</lines>
+
+		</pageGraphics>
+	</header>
+   </pageTemplate>
+</template>
+
+  
+  <story>
+
+	<h2>Reporte de Contratos</h2>
+
+    <blockTable >
+      <tr>
+        <td><para style="tablat">Nro Contrato</para></td>
+	<td><para style="tablat">Nombre</para></td>
+	<td><para style="tablat">Socio</para></td>
+	<td><para style="tablat">Fecha de Inicio</para></td>
+        <td><para style="tablat">Prolongacion</para></td>
+	<td><para style="tablat">Fecha de Finalización</para></td>
+      </tr>
+      <tr>
+        <td><para>[[ repeatIn(objects,'o') ]][[ o.number]]</para></td>
+        <td><para>[[ o.name]]</para></td>
+        <td><para>[[ o.partner_id.name]]</para></td>
+        <td><para>[[ o.start_date]]</para></td>
+        <td><para>[[ o.prolong]]</para></td>
+	<td><para>[[ o.next_expiration_date]]</para></td>
+      </tr>
+    </blockTable>
+    
+  </story>
+
+
+
+</document>

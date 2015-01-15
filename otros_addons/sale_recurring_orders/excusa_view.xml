@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Views -->
+
+     <record model="ir.ui.view" id="contrato_search_view">
+<field name="name">excusas.search</field>
+<field name="model">excusa</field>
+<field name="arch" type="xml">
+<search string="Busqueda de Excusas">
+<field name="name"/>
+<field name="clientes"/>
+
+
+
+</search>
+</field>
+</record>
+
+
+        <record model="ir.ui.view" id="excusa_form">
+            <field name="name">excusa_form</field>
+            <field name="model">excusa</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de Excusas" version="7.0">
+		
+		<sheet>
+                    <group>
+		    <group>
+	            <field name="nombres_clientes" invisible="1"/>
+		    <field name="name" coslpan="2"/>
+                    <field name="fecha_creacion"/>
+		    <field name="recurrente_id" required="1" widget="selection"/>
+		    </group>
+		    
+	            <group>
+                    <field name="fecha_inicio"/>
+		    <field name="fecha_final"/>
+	            </group>		    
+			</group>
+		     <group>
+		    <field name="descripcion"/>
+		    <field name="receptor"/>
+		    <field name="clientes" widget="one2many">
+                    	<tree editable="top">
+                    		<field name="partner_id"/>
+                    	</tree>
+                    </field>
+		    <field name="observaciones"/>	
+             	   </group>
+		</sheet>
+                </form>
+            </field>
+        </record>
+
+	
+       
+        
+        <record model="ir.ui.view" id="excusa_view">
+            <field name="name">excusa_tree</field>
+            <field name="model">excusa</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Excusas">
+                    <field name="name"/>
+                    <field name="fecha_creacion"/>
+                    <field name="fecha_inicio"/>
+		    <field name="fecha_final"/>
+		    <field name="descripcion"/>
+		    <field name="receptor"/>
+		    <field name="clientes" invisible="1"/>
+		    <field name="nombres_clientes"/>
+		    <field name="csocio"/> 
+                </tree>
+            </field>
+        </record>
+
+
+
+	<record model="ir.actions.act_window" id="excusa_action">
+	<field name="name">Excusas</field>
+	<field name="res_model">excusa</field>
+	<field name="view_mode">tree,form</field>
+	<field name="context">{'default_type':'type_fpm'}</field>
+	<field name="help" type="html">
+	 	<p class="oe_view_nocontent_create">
+                
+                </p>
+	</field>
+	
+	</record>
+
+	<menuitem name="Gestion de Excusas" id="menu_excusas" 
+            parent="base.menu_sales" action="excusa_action" 
+            sequence="4" string="Gestion de Excusas"/>
+   
+    </data>
+</openerp>
