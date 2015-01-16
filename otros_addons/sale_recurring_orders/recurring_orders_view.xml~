@@ -85,7 +85,7 @@
                             <group>
                                 <field name="active"/>
                                 <field name="number"/>
-				
+				<field name="phone"/>
                            <field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
 				<field name="end_date" />
 				<!--<field name="cant_clientes"/>
