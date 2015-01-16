@@ -31,7 +31,7 @@ import openerp.addons.decimal_precision as dp
 
 class agreement(osv.osv):
     _name = 'sale.recurring_orders.agreement'
-    _rec_name="number"
+    #_rec_name="name"
     _inherit = ['mail.thread']
     _description = "Recurring orders agreement"
 
@@ -47,7 +47,7 @@ class agreement(osv.osv):
 
     def update_account_invoice(self,cr,uid,fields,context={}):
 	invoices=self.pool.get('account.invoice')
-	invoice_ids=sales.search(cr,uid,[])
+	invoice_ids=invoices.search(cr,uid,[])
 	agreement_ids=self.search(cr,uid,[])
 	for invoice in self.pool.get('account.invoice').browse(cr,uid,invoice_ids,context=context):
 	    for agreement in self.browse(cr,uid,agreement_ids,context=context):
@@ -207,22 +207,20 @@ class agreement(osv.osv):
 
 
     _columns = {
+	'name': fields.char(string="Nombre del Proyecto", help='Name that helps to identify the proyect',required=True),
 	#'obt_descuento':fields.function(_ob_desc,string="Total Descuento(%)",help="campo para obtencion de descuentos individuales",type="float"),
 	#'parametros_id':fields.many2one('cybex.parametros',"Descuentos",help="parametro de descuentos y pagos"),
 	#'intervalo':fields.function(_intervalo,string="intervalo",type="integer"),
-	'payment': fields.selection([('efectivo','Efectivo'),
-                                    ('dolar','Dolares'),
-                                    ('debito','Debito automatico'),
-				    ('cheque','Cheques'),
-				    ('tarjeta','Tarjeta'),
-				    ('otro','Otro')], string="Tipo de Pago",help='Ingrese el tipo de Pago inicial(en caso de pagar 1 año obtendra un descuento mas)'),
+	#'payment': fields.selection([('efectivo','Efectivo'),
+        #                            ('dolar','Dolares'),
+        #                            ('debito','Debito automatico'),
+	#			    ('cheque','Cheques'),
+	#			    ('tarjeta','Tarjeta'),
+	#			    ('otro','Otro')], string="Tipo de Pago",help='Ingrese el tipo de Pago inicial(en caso de pagar 1 año obtendra un descuento mas)'),
 	#'cant_clientes_act':fields.function(_cant_clientes_act,string='Nro de clientes Activos',help="numero de clientes activos",type="integer",store=True),
 	#'cant_clientes':fields.function(_cant_clientes,string='Nro de clientes',help="numero de clientes",type="integer",store=True),
-	'membership':fields.many2one('product.product',string="Periodo",help="membership type"),
-	'name': fields.selection([('Clasea','Clase A'),
-                                    ('claseb','Clase B'),
-                                    ('clasec','Clase C'),
-				    ('canje','CANJE')], string="Nombre", help='Name that helps to identify the agreement'),
+	#'membership':fields.many2one('product.product',string="Periodo",help="membership type"),
+	
         'number': fields.char('Numero de Grupo', select=1, size=32, help="Number of agreement. Keep empty to get the number assigned by a sequence."),
         'active': fields.boolean('Active', help='Unchecking this field, quotas are not generated'),
         'partner_id': fields.many2one('res.partner', 'Customer', select=1, change_default=True, required=True, help="Customer you are making the agreement with"),
@@ -233,8 +231,8 @@ class agreement(osv.osv):
         'prolong_interval': fields.integer('Interval', help="Interval in time units to prolong the agreement until new renewable (that is automatic for unlimited term, manual for renewable fixed term)."),
         'prolong_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Intervalo de renovacion', help='Time unit for the prolongation interval'),
 	
-	'sales_orders_ids':fields.one2many('sale.order','agreement_id','Ventas'),
-	'account_invoice_ids':fields.one2many('account.invoice','agreement_id','Facturas'),
+	'sales_orders_ids':fields.one2many('sale.order','agreement_asociate','Ventas'),
+	'account_invoice_ids':fields.one2many('account.invoice','agreement_asociate','Facturas'),
 
         'agreement_line': fields.one2many('sale.recurring_orders.agreement.line', 'agreement_id', 'Agreement lines'),
         'order_line': fields.one2many('sale.recurring_orders.agreement.order', 'agreement_id', 'Order lines', readonly=True),
@@ -251,15 +249,19 @@ class agreement(osv.osv):
 	'fecha_ic':fields.date('Fecha de Inscripcion',help="Fecha en la que el contrato fue realizado"),
 	'excusas_id':fields.one2many('excusa','recurrente_id',string="Excusas",help="Historial de Excusas dejadas por los clientes"),
 	'act_manual_ag_ids':fields.one2many('cybex.act_manual_agreement','agreement_id',string="Activaciones/desactivaciones",help="activar todos los clientes del contrato o desactivar todos los clientes del contrato"),
-	'promo_tiempo':fields.function(_promo_tiempo,string="Tiempo de Promocion(Dias gratis)",help="cantidad de tiempo gratis por promocion"),
-	'promociones_ids':fields.one2many('promocontrato','contrato_id',string="Promociones"),
-	'dias_faltantes':fields.integer('Dias Faltantes de Promocion'),
-	'desc_extra':fields.integer('Descuento Extra',help="Ingrese un valor de descuento extra"),
+	#'promo_tiempo':fields.function(_promo_tiempo,string="Tiempo de Promocion(Dias gratis)",help="cantidad de tiempo gratis por promocion"),
+	#'promociones_ids':fields.one2many('promocontrato','contrato_id',string="Promociones"),
+	#'dias_faltantes':fields.integer('Dias Faltantes de Promocion'),
+	#'desc_extra':fields.integer('Descuento Extra',help="Ingrese un valor de descuento extra"),
+	'address_customer':fields.char('Domicilio'),
+	'phone':fields.integer('Telefono'),	
+	'name_representative': fields.char(string="Nombre del Representante", help='Name that helps to identify the representative agreement',required=True),
+	
     }
 
     _defaults = {
         'active': lambda *a: 0,
-        'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(cr, uid, 'sale', context=c),
+        #'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(cr, uid, 'sale', context=c),
         'prolong': lambda *a: 'recurrent',
         'prolong_interval': lambda *a: 1,
         'prolong_unit': lambda *a: 'years',
@@ -763,15 +765,15 @@ class agreement_renewal(osv.osv):
 
 agreement_renewal()
 
-class sales_agreement_order(osv.osv):
-    _inherit = 'sale.order'
-    description='Sale of Agreement'
+#class sales_agreement_order(osv.osv):
+#    _inherit = 'sale.order'
+#    description='Sale of Agreement'
+    
+#    _columns={
 	
-
-    _columns={
-	'agreement_id':fields.many2one('sale.recurring_orders.agreement','Reference Agreement',ondelete='cascade'),
-
-	}
+	
+	
+#	}
 
 class invoice_agreement(osv.osv):
     _inherit = 'account.invoice'
@@ -780,5 +782,5 @@ class invoice_agreement(osv.osv):
 
     _columns={
 	'agreement_id':fields.many2one('sale.recurring_orders.agreement','Reference Agreement',ondelete='cascade'),
-
+	'agreement_asociate':fields.many2one('sale.recurring_orders.agreement','Proyecto asociado'),
 	}

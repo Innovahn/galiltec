@@ -43,6 +43,7 @@
         'sale_order_view.xml',
 	'report/cybex_report.xml',
 	'act_manual_agreement_view.xml',
+	'account_invo_view.xml',
 	
 	
 	

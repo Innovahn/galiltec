@@ -570,8 +570,13 @@ msgstr "Fecha"
 
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,name:0
-msgid "Name that helps to identify the agreement"
-msgstr "Nombre que ayuda a identificar el contrato"
+msgid "Name that helps to identify the proyect"
+msgstr "Nombre que ayuda a identificar el proyecto"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,name_representative:0
+msgid "Name that helps to identify the representative agreement"
+msgstr "Nombre que ayuda a identificar el proyecto"
 
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,end_date:0

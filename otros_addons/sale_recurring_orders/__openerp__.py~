@@ -45,7 +45,7 @@
 	'act_manual_agreement_view.xml',
 	
 	
-	'excusa_view.xml',
+	
     ],
     'auto_install': False,
     "installable": True,

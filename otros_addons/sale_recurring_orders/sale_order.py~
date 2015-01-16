@@ -9,7 +9,8 @@ class sale_order(osv.osv):
         agreement_obj = self.pool.get('sale.recurring_orders.agreement')
         agreement_line_obj = self.pool.get('sale.recurring_orders.agreement.line')
         for sale_order in self.browse(cr, uid, ids, context=context):
-            agreement = { #'name': sale_order.name,
+            agreement = { 'name': sale_order.agreement_asociate.name,
+                          'usuario_id': sale_order.user_id.id,
                           'partner_id': sale_order.partner_id.id,
                           'company_id': sale_order.company_id.id, 
                           'start_date': datetime.datetime.now().strftime("%Y-%m-%d"), }
@@ -41,8 +42,11 @@ class sale_order(osv.osv):
     _name = 'sale.order'
     _inherit = 'sale.order'
     
+
     _columns = {
         'from_agreement': fields.boolean('From agrement?', help='This field indicates if the sale order comes from an agreement.'),
+        'agreement_asociate':fields.many2one('sale.recurring_orders.agreement','Asociate Agreement'),
+        #'agreement_id':fields.many2one('sale.recurring_orders.agreement','Reference Agreement',ondelete='cascade'),
     }        
 
 sale_order()

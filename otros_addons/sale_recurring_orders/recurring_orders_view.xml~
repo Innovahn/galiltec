@@ -40,12 +40,11 @@
             <field name="arch" type="xml">
                 <tree string="Recurring orders agreements">
                     <field name="number"/>
-                    <field name="name"/>
-                    <field name="partner_id"/>
+                    <field name="name"  string="Nombre del Proyecto"/>
                     <field name="start_date"/>
-                    <field name="prolong"/>
-                    <field name="next_expiration_date"/>
-                    <field name="company_id" groups="base.group_multi_company"/>
+		    <field name="end_date"/>	
+                    <!--<field name="next_expiration_date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>-->
                 </tree>
             </field>
         </record>
@@ -73,13 +72,14 @@
                             <group>
 				<!-- <field name="intervalo" /> -->
                                 <field name="partner_id" />
+				<field name="address_customer" /> 
 				<field name="usuario_id" required="1"/>
                                 <!--<field name="company_id" groups="base.group_multi_company"/>-->
 				<!-- <field name="membership" required="1" on_change="onchange_membership(membership)"/> -->
 			<!--	<field name="membership" domain="[('tipo.codigo','!=','02')]" required="1" on_change="onchange_membership(membership)"/> -->
-				<field name="payment"  />
-				<!--<field name="parametros_id" /-->
-				<!--<field name="desc_extra"/> -->
+				<field name="name"  string="Nombre del Proyecto"/>
+				
+				<field name="name_representative"/>
 				<!-- <field name="obt_descuento" />-->
                             </group>
                             <group>
@@ -108,9 +108,7 @@
                                     <field name="prolong_interval" attrs="{'required': [('prolong', '!=', 'fixed')]} "/>
                                     <field name="prolong_unit" attrs="{'required': [('prolong', '!=', 'fixed')], 'invisible': [('prolong', '=', 'unlimited')]}" string="intervalo de renovacion" /> 
                                 </group> -->
-                                <group attrs="{'invisible': [('prolong','!=', 'fixed')]}" colspan="4" col="2"> 
-                                    <field name="end_date" attrs="{'required': [('prolong', '=', 'fixed')]}"/>
-                                </group>
+                             
                             </group>
 				
                         </group>
@@ -127,7 +125,7 @@
                         <notebook colspan="4">
 			     <page string="Ordenes de Venta">
                                 <field name="sales_orders_ids" mode="tree"  widget="one2many_list" >
-                                    <tree string="Sales Order" >
+                                    <tree string="Sales Order">
 					<field name="name" />
 					<field name="date_order" string="Fecha de Venta" />
 					<field name="partner_id" />
@@ -139,7 +137,7 @@
 			     </page>
 			     <page string="Facturas de Cliente">
                                 <field name="account_invoice_ids" nolabel="1" mode="tree" widget="one2many_list" >
-                                    <tree string="Acoount Invoice">
+                                    <tree string="Acoount Invoice" >
 					<field name="partner_id" String="Cliente"/>
 					<field name="date_invoice" />
 					<field name="number" />
@@ -267,11 +265,11 @@
         </record>
         
         <!-- Menu items -->
-        <!--
+       
         <menuitem name="Gestion de Grupos" id="menu_recurring_orders_agreements" 
             parent="base.menu_sales" action="action_sale_recurring_orders_agreement" 
             sequence="4" string="Gestion de Grupos"/>
-	 -->
+	 
       
     </data>
 </openerp>

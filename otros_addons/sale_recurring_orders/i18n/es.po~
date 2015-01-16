@@ -458,7 +458,7 @@ msgstr "Cantidad"
 #: model:ir.ui.menu,name:sale_recurring_orders.menu_recurring_orders_agreements
 #: view:sale.recurring_orders.agreement:0
 msgid "Recurring orders agreements"
-msgstr "Gestion de Contratos de Producción"
+msgstr "Gestion Contratos de Producción"
 
 #. module: sale_recurring_orders
 #: view:sale.recurring_orders.renew_wizard:0
@@ -570,8 +570,8 @@ msgstr "Fecha"
 
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,name:0
-msgid "Name that helps to identify the agreement"
-msgstr "Nombre que ayuda a identificar el contrato"
+msgid "Name that helps to identify the proyect"
+msgstr "Nombre que ayuda a identificar el proyecto"
 
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,end_date:0
